@@ -1,15 +1,21 @@
 from datetime import datetime
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
-plt.switch_backend('agg')
+#import matplotlib.pyplot as plt
+#plt.switch_backend('agg')
 import io
 from torchvision import transforms as trans
-from data.data_pipe import de_preprocess
 import torch
-from model import l2_norm
 import pdb
 import cv2
+
+def l2_norm(input,axis=1):
+    norm = torch.norm(input,2,axis,True)
+    output = torch.div(input, norm)
+    return output
+
+def de_preprocess(tensor):
+    return tensor*0.5 + 0.5
 
 def separate_bn_paras(modules):
     if not isinstance(modules, list):
@@ -46,7 +52,7 @@ def prepare_facebank(conf, model, mtcnn, tta = True):
                     except:
                         continue
                     if img.size != (112, 112):
-                        img = mtcnn.align(img)
+                        img,_ = mtcnn.align(img)
                     with torch.no_grad():
                         if tta:
                             mirror = trans.functional.hflip(img)
@@ -151,3 +157,10 @@ def draw_box_name(bbox,name,frame):
                     1,
                     cv2.LINE_AA)
     return frame
+
+def convert_pil_rgb2bgr(img):
+    # convert RGB image to BGR image (all in PIL)
+    img_cv2 = np.asarray(img)
+    img_cv2_cvt = img_cv2[...,::-1]
+    pil = Image.fromarray(img_cv2_cvt)
+    return pil
