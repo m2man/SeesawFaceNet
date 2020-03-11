@@ -1,5 +1,5 @@
 import torch.backends.cudnn as cudnn
-from seesaw_models.DW_SeesawFaceNetv2 import DW_SeesawFaceNetv2, l2_norm
+from seesaw_package.DW_SeesawFaceNetv2 import DW_SeesawFaceNetv2, l2_norm
 import torch
 import numpy as np
 from PIL import Image
