@@ -3,12 +3,12 @@
 import cv2
 import torch
 from PIL import Image
-from ultraface_pytorch.vision.ssd.config.fd_config import define_img_size
+from ultraface_package.vision.ssd.config.fd_config import define_img_size
 
 input_img_size = 320 # 128/160/320/480/640/1280
 define_img_size(input_img_size)  # must put define_img_size() before 'import create_mb_tiny_fd, create_mb_tiny_fd_predictor'
 
-from ultraface_pytorch.vision.ssd.mb_tiny_RFB_fd import create_Mb_Tiny_RFB_fd, create_Mb_Tiny_RFB_fd_predictor
+from ultraface_package.vision.ssd.mb_tiny_RFB_fd import create_Mb_Tiny_RFB_fd, create_Mb_Tiny_RFB_fd_predictor
 
 #from ultraface_pytorch.vision.utils.misc import Timer
 #import sys

@@ -3,9 +3,9 @@ import torch
 from PIL import Image
 import cv2
 from torch.autograd import Variable
-from mtcnn_pytorch.src.get_nets import ONet
-from mtcnn_pytorch.src.box_utils import nms, calibrate_box, get_image_boxes
-from mtcnn_pytorch.src.align_trans import get_reference_facial_points, warp_and_crop_face
+from mtcnn_package.src.get_nets import ONet
+from mtcnn_package.src.box_utils import nms, calibrate_box, get_image_boxes
+from mtcnn_package.src.align_trans import get_reference_facial_points, warp_and_crop_face
 #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 #device = torch.device('cpu')
 
