@@ -17,8 +17,9 @@
 ### Create New Facebank
 1. If you want to create entire new database, run **create_facebank.py**. Currently the database includes only 5 IDs storing in **facebank** folder
 2. All images of IDs you want to recognise shoule be store in **facebank** folder (noted in **create_facebank.py**). An example ID image is below
-
-<img align="middle" src="https://user-images.githubusercontent.com/15571804/76435038-69e07b00-63ae-11ea-940d-c7da5643e06c.jpg" width="250" height="350"/>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/15571804/76435038-69e07b00-63ae-11ea-940d-c7da5643e06c.jpg" width="250" height="350"/>
+</p>
 
 ### Update Current Facebank
 1. If you want to update the database, e.g. add new IDs, then run **update_facebank.py** (Please read the note in the file carefully). 
@@ -58,10 +59,14 @@ predicted_distance = distance[0].numpy() # 1st and the only element in the outpu
 2. Output will be exported to **result_general_images** folder
 Some results are depicted as follow (can see full in the  above-mentioned folder)
 
-<img align="middle" src="https://user-images.githubusercontent.com/15571804/76436517-3ef72680-63b0-11ea-9b55-b8401c8e12c1.jpg" width="350" height="240"/>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/15571804/76436517-3ef72680-63b0-11ea-9b55-b8401c8e12c1.jpg" width="450" height="340"/>
+</p>
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/15571804/76436735-7d8ce100-63b0-11ea-9fd0-3e5c2c780301.jpg" width="450" height="340"/>
+</p>
 
-<img align="middle" src="https://user-images.githubusercontent.com/15571804/76436735-7d8ce100-63b0-11ea-9fd0-3e5c2c780301.jpg" width="350" height="240"/>
-
-
-<img align="middle" src="https://user-images.githubusercontent.com/15571804/76436814-9a291900-63b0-11ea-932b-2b02c1926944.jpg" width="350" height="410"/>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/15571804/76436814-9a291900-63b0-11ea-932b-2b02c1926944.jpg" width="350" height="410"/>
+</p>
