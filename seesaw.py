@@ -14,8 +14,8 @@ import cv2
 
 class Seesaw_Recognise(object):
     def __init__(self, pretrained_path = '/directory/to/model.pth', save_facebank_path = 'directory/to/facebank.pth and .npy folder', device='cpu'):
-        self.alignment_model = MTCNN_Alignment(device='cpu', landmarks_threshold=0.4)
-        self.detect_model = Ultraface_detect(model_path='ultraface_package/models/pretrained/version-RFB-320.pth')        
+        self.alignment_model = MTCNN_Alignment(device=device, landmarks_threshold=0.4)
+        self.detect_model = Ultraface_detect(model_path='ultraface_package/models/pretrained/version-RFB-320.pth', device=device)        
         
         self.embedding_size = 512
         self.device=torch.device(device)

@@ -3,9 +3,6 @@
 # Run this to test the recognise model on facebank folder in facebank/
 # ================ #
 import cv2
-from PIL import Image
-from mtcnn import MTCNN_Alignment
-from ultraface import Ultraface_detect
 from seesaw import Seesaw_Recognise
 import numpy as np
 from pathlib import Path
