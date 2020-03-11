@@ -24,7 +24,8 @@ If you want to recognise on face-cropped images (No need to run Face detection),
 ```
 from PIL import Image
 from utils import convert_pil_rgb2bgr
-from ultraface import Ultraface_detect
+from seesaw import Seesaw_Recognise
+
 seesaw_model = Seesaw_Recognise(pretrained_path='pretrained_model/DW_SeesawFaceNetv2.pth', save_facebank_path='facebank/', device='cpu') # device='cuda:0' if GPU available
                                 
 img = Image.open('path/to/image.jpg') # Should be RGB
