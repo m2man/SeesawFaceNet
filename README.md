@@ -1,4 +1,4 @@
-# OmniGo Face Recognition using SeesawFaceNet
+# Face Recognition using SeesawFaceNet
 ### NOTE
 - This repo is only for running (there is no training code in this repo)
 - Images in facebank are sensitive
@@ -7,7 +7,7 @@
     - Careful since default format of cv2 is BGR channel, need to convert to RGB by using ```cv2.cvtColor(img, cv2.COLOR_BGR2RGB)```
 - Input of Face Alignment is PIL image 
     - Need to convert cv2 to PIL, but simple by using ```pil_img = Image.fromarray(cv2_img)```
-- Input of Face Detection is PIL image 
+- Input of Face Recognition is PIL image 
     - input should be in **BGR format**
     - using ```convert_pil_rgb2bgr``` function in **utils.py** to convert PIL RGB to PIL BGR
 - All algorithms are combined in *Seesaw_Recognise* class in **seesaw.py**
