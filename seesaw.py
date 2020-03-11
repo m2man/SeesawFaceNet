@@ -8,7 +8,7 @@ import math
 from collections import OrderedDict
 from mtcnn import MTCNN_Alignment
 from ultraface import Ultraface_detect
-from utils import convert_pil_rgb2bgr
+from utils import convert_pil_rgb2bgr, draw_box_name
 from pathlib import Path
 import cv2
 
@@ -19,7 +19,7 @@ class Seesaw_Recognise(object):
         
         self.embedding_size = 512
         self.device=torch.device(device)
-        self.threshold = 1.5
+        self.threshold = 1.35
         self.model = DW_SeesawFaceNetv2(self.embedding_size).to(self.device)
         self.model.eval()
         print('seesawFaceNet model generated')
@@ -85,6 +85,38 @@ class Seesaw_Recognise(object):
         min_idx[minimum > self.threshold] = -1 # if no match, set idx to -1
         recognise_id = [self.names[x+1] for x in min_idx] # convert to real name
         return recognise_id, minimum # min_idx is index of recognise, minimum is distance of that idx
+
+    def infer_general_image(self, image, plot_result=True, tta=False):
+        # image should be in cv2 format
+        # If no facebank --> return None
+        # If plot_result = True --> return annotated image
+        # If plot_result = False --> return cropped faces and their predicted ID
+        target_embs = self.targets
+        names = self.names
+        if target_embs is None or names is None:
+            print("No facebank Detected ==>  CANT infering!")
+            return None
+        
+        origin_image = image
+        faces, boxes = self.detect_model.detect_face(image)
+        list_imgs_to_recognise = []
+        for face in faces:
+            # align
+            img,_ = self.alignment_model.align(face)
+            # Convert to BGR (IMPORTANT)
+            img = convert_pil_rgb2bgr(img)
+            list_imgs_to_recognise.append(img)
+        # recognise
+        predicted_names, predicted_distances = self.infer(list_imgs_to_recognise, tta=tta)
+
+        if plot_result:
+            boxes = boxes.astype(int)
+            boxes = boxes + [-1,-1,1,1] # personal choice
+            for idx,box in enumerate(boxes):
+                image = draw_box_name(box, predicted_names[idx], origin_image)
+            return Image.fromarray(image)
+
+        return faces, names
 
     def create_facebank(self, facebank_path = '/directory/to/facebank/folder/images/', save_facebank_path = '/directory/to/save/folder/', run_detect=True, tta=False):
         # Create facebank from scratch
@@ -155,7 +187,6 @@ class Seesaw_Recognise(object):
         torch.save(final_embeddings, save_facebank_path+'facebank.pth')
         np.save(save_facebank_path+'names.npy', final_names)
         return final_embeddings, final_names
-
 
     def load_facebank(self, save_facebank_path='directory/to/facebank.pth and .npy folder/'):
         embeddings = torch.load(save_facebank_path+'facebank.pth')

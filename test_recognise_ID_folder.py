@@ -1,7 +1,7 @@
-
 # ===== NOTE ===== #
 # Run this to test the recognise model on facebank folder in facebank/
 # ================ #
+
 import cv2
 from seesaw import Seesaw_Recognise
 import numpy as np
